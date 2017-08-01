@@ -79,7 +79,7 @@ INSERT INTO Sauce (SID) VALUES ('ChipotleSouthwest'), ('HoneyMustard'), ('LightM
         public static IForm<SandwichOrder> BuildForm()
         {
             string connectionString =
-                "Your connection string";
+                "Server=tcp:wawonbotstorage.database.windows.net,1433;Initial Catalog=testbotstorage;Persist Security Info=False;User ID=warren;Password=R0s@r1@n;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             SqlConnection connection = new SqlConnection(connectionString);
             OnCompletionAsyncDelegate<SandwichOrder> processOrder = async (context, state) =>
             {
@@ -191,6 +191,30 @@ INSERT INTO Sauce (SID) VALUES ('ChipotleSouthwest'), ('HoneyMustard'), ('LightM
                     .Build();
         }
     };
+```
+
+```cs
+        internal static IDialog<SandwichOrder> MakeRootDialog()
+        {
+            return Chain.From(() => FormDialog.FromForm(SandwichOrder.BuildForm));
+        }
+        /// <summary>
+        /// POST: api/Messages
+        /// Receive a message from a user and reply to it
+        /// </summary>
+        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+        {
+            if (activity.Type == ActivityTypes.Message)
+            {
+                await Conversation.SendAsync(activity, MakeRootDialog);
+            }
+            else
+            {
+                HandleSystemMessage(activity);
+            }
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            return response;
+        }
 ```
 ### 3.3. Explaination of the code
 ###### 3.3.1 The form option (Can be string, int, list...)
@@ -391,10 +415,5 @@ public virtual async Task<HttpResponseMessage> Post([FromBody] Activity activity
 ```sql
 SELECT * FROM SandwichOrder;
 ```
+
 ![](images/test3.PNG)
-
-
-
-
-
-
