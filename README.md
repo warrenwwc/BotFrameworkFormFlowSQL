@@ -43,7 +43,7 @@ INSERT INTO Cheese (CID) VALUES ('American'), ('MontereyCheddar'), ('Pepperjack'
 INSERT INTO Topping (TID) VALUES ('Avocado'), ('BananaPeppers'), ('Cucumbers'), ('GreenBellPeppers'),
 ('Jalapenos'), ('Lettuce'), ('Olives'), ('Pickles'), ('RedOnion'), ('Spinach'), ('Tomatoes');
 INSERT INTO Sauce (SID) VALUES ('ChipotleSouthwest'), ('HoneyMustard'), ('LightMayonnaise'), ('RegularMayonnaise'),
-('Mustard'), ('Oil'), ('Pepper'), ('Ranch'), ('SweetOnion'), ('Vinegar');)
+('Mustard'), ('Oil'), ('Pepper'), ('Ranch'), ('SweetOnion'), ('Vinegar');
 ```
 ### 2.4. Set firewall rules
 ###### 2.4.1. Click "Set server firewall" in Tools
